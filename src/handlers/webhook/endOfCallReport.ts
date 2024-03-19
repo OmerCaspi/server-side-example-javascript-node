@@ -8,5 +8,7 @@ export const endOfCallReportHandler = async (
    * You can store the information like summary, typescript, recordingUrl or even the full messages list in the database.
    */
 
+  console.log("End of call report", payload);
+
   return;
 };
