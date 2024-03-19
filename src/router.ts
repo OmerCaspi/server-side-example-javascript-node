@@ -9,6 +9,11 @@ const router = Router();
 
 console.log(`In router`);
 
+router.use((req, res, next) => {
+  console.log(`Path: ${req.path}`);
+  next();
+});
+
 router.post('/inbound', inboundHandler);
 router.post('/outbound', outboundHandler);
 router.post('/webhook', webhookHandler);
