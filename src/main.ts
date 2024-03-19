@@ -17,5 +17,5 @@ app.get('/', (req, res) => {
 app.use('/api', router);
 
 app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+  console.log(`[ I am ready ] http://${host}:${port}`);
 });
