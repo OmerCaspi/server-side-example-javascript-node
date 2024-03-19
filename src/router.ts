@@ -7,6 +7,8 @@ import { functionsCallHandler } from './handlers/functions';
 
 const router = Router();
 
+console.log(`In router`);
+
 router.post('/inbound', inboundHandler);
 router.post('/outbound', outboundHandler);
 router.post('/webhook', webhookHandler);
