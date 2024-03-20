@@ -8,13 +8,30 @@ import { functionsCallHandler } from './handlers/functions';
 
 const router = Router();
 
-console.log(`In router`);
-
 router.use(express.json()); // This line is needed to parse JSON request bodies
 
 router.use((req, res, next) => {
-  console.log(`Path: ${req.path}`);
-  console.log(`Payload: ${JSON.stringify(req.body, null, 2)}`); // This line prints the request payload
+
+  // Check request body to see if message object has type "status-update" and if so, log the status property
+  if (req.body.message && req.body.message.type === 'status-update') {
+    console.log(`Status: ${req.body.message.status}\n`);
+  }
+
+  // If message type is "end-of-call-report", log endedReason property
+  if (req.body.message && req.body.message.type === 'end-of-call-report') {
+    console.log(`Ended Reason: ${req.body.message.endedReason}\n`);
+
+    // Go over messages array, and if role is not "system" the log the role and the message properties
+    if (req.body.message.messages) {
+      req.body.message.messages.forEach((message: any) => {
+        if (message.role !== 'system') {
+          console.log(`Role: ${message.role}`);
+          console.log(`Message: ${message.message}\n`);
+        }
+      });
+    }
+  }
+
   next();
 });
 
