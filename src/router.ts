@@ -1,3 +1,4 @@
+import express from 'express';
 import { Router } from 'express';
 import { inboundHandler } from './handlers/inbound';
 import { outboundHandler } from './handlers/outbound';
@@ -9,8 +10,11 @@ const router = Router();
 
 console.log(`In router`);
 
+router.use(express.json()); // This line is needed to parse JSON request bodies
+
 router.use((req, res, next) => {
   console.log(`Path: ${req.path}`);
+  console.log(`Payload: ${JSON.stringify(req.body, null, 2)}`); // This line prints the request payload
   next();
 });
 
