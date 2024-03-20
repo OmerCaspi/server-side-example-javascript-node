@@ -12,9 +12,14 @@ router.use(express.json()); // This line is needed to parse JSON request bodies
 
 router.use((req, res, next) => {
 
-  // Check request body to see if message object has type "status-update" and if so, log the status property
+  // If message type is "status-update", log the status property
   if (req.body.message && req.body.message.type === 'status-update') {
     console.log(`Status: ${req.body.message.status}`);
+  }
+
+  // If message type is "function-call", log the call properties
+  if (req.body.message && req.body.message.type === 'function-call') {
+    console.log(`Function Call: ${req.body.message}\n`);
   }
 
   // If message type is "end-of-call-report", log endedReason property
