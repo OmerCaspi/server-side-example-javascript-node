@@ -19,7 +19,8 @@ router.use((req, res, next) => {
 
   // If message type is "function-call", log the call properties
   if (req.body.message && req.body.message.type === 'function-call') {
-    console.log(`Function Call: ${req.body.message}\n`);
+    console.log(`Function Call: ${req.body}\n`);
+    return res.status(201).json({});
   }
 
   // If message type is "end-of-call-report", log endedReason property
